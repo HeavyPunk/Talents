@@ -39,7 +39,7 @@ public class OlimpiadesAdapter extends RecyclerView.Adapter<OlimpiadesAdapter.Ol
         return olimpiades.size();
     }
 
-    public class OlimpiadesViewHolder extends RecyclerView.ViewHolder {
+    public static class OlimpiadesViewHolder extends RecyclerView.ViewHolder {
         TextView classes;
         TextView title;
         TextView subTilte;

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,28 +23,40 @@ public class EventsFragment extends Fragment {
 
     public static ArrayList<Olimpiade> olimpiads = null;
 
+    Button searchButton;
+    TextView searchSpace;
+    RecyclerView recyclerView;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_events, container, false);
+        final View root = inflater.inflate(R.layout.fragment_events, container, false);
+        Log.d("Events root: ", "create");
 
-        Thread downloading = new Thread(new OlimpiadsThread("математика"));
-        downloading.start();
-
-        try {
-            while (olimpiads == null) ;
-            if (!olimpiads.toString().equals(""))
-                Log.d("Main threat!!!", olimpiads.toString());
-            else
-                Log.d("Main threat!!!", "null");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("Main threat!!!", "ERROR");
-        }
-        Log.d("Fragment", "All created");
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-
-        OlimpiadesAdapter olimpiadesAdapter = new OlimpiadesAdapter(olimpiads);
-        recyclerView.setAdapter(olimpiadesAdapter);
+        searchButton = root.findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchSpace = root.findViewById(R.id.searchSpace);
+                if(searchSpace != null) {
+                    Thread downloading = new Thread(new OlimpiadsThread(searchSpace.getText().toString()));
+                    downloading.start();
+                    try {
+                        while (olimpiads == null) ;
+                        if (!olimpiads.toString().equals(""))
+                            Log.d("Main threat!!!", olimpiads.toString());
+                        else
+                            Log.d("Main threat!!!", "null");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d("Main threat!!!", "ERROR");
+                    }
+                    Log.d("Fragment", "All created");
+                    recyclerView = root.findViewById(R.id.rv);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    OlimpiadesAdapter adapter = new OlimpiadesAdapter(olimpiads);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+        });
         return root;
     }
 }

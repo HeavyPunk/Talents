@@ -77,12 +77,6 @@ public class MenuActivity extends AppCompatActivity implements ProfileEventListe
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
         navigationView.setSelectedItemId(R.id.navigation_events);
 
-        actionBar.setTitle(R.string.title_events);
-        EventsFragment fragmentEvents = new EventsFragment();
-        FragmentTransaction ftEvents = getSupportFragmentManager().beginTransaction();
-        ftEvents.replace(R.id.nav_host_fragment, fragmentEvents, "");
-        ftEvents.commit();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener selectedListener =
