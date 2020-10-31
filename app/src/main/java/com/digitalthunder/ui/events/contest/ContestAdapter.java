@@ -1,4 +1,4 @@
-package com.digitalthunder.ui.events;
+package com.digitalthunder.ui.events.contest;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +12,11 @@ import com.digitalthunder.R;
 
 import java.util.ArrayList;
 
-public class OlimpiadesAdapter extends RecyclerView.Adapter<OlimpiadesAdapter.OlimpiadesViewHolder> {
+public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.OlimpiadesViewHolder> {
 
-    ArrayList<Olimpiade> olimpiades;
-    public OlimpiadesAdapter(ArrayList<Olimpiade> olimpiades) {
-        this.olimpiades = olimpiades;
+    ArrayList<Contest> contests;
+    public ContestAdapter(ArrayList<Contest> contests) {
+        this.contests = contests;
     }
 
     @NonNull
@@ -28,15 +28,16 @@ public class OlimpiadesAdapter extends RecyclerView.Adapter<OlimpiadesAdapter.Ol
 
     @Override
     public void onBindViewHolder(@NonNull OlimpiadesViewHolder holder, int position) {
-        holder.classes.setText(olimpiades.get(position).classes);
-        holder.title.setText(olimpiades.get(position).title);
-        holder.subTilte.setText(olimpiades.get(position).subTitle);
-        holder.description.setText(olimpiades.get(position).description);
+        holder.classes.setText(contests.get(position).classes);
+        holder.title.setText(contests.get(position).title);
+        holder.subTilte.setText(contests.get(position).subTitle);
+        holder.description.setText(contests.get(position).description);
+        holder.link = contests.get(position).link;
     }
 
     @Override
     public int getItemCount() {
-        return olimpiades.size();
+        return contests.size();
     }
 
     public static class OlimpiadesViewHolder extends RecyclerView.ViewHolder {
@@ -44,6 +45,7 @@ public class OlimpiadesAdapter extends RecyclerView.Adapter<OlimpiadesAdapter.Ol
         TextView title;
         TextView subTilte;
         TextView description;
+        String link;
 
         public OlimpiadesViewHolder(@NonNull View itemView) {
             super(itemView);

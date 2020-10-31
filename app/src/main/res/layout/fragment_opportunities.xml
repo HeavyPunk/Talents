@@ -7,4 +7,5 @@
     android:orientation="vertical"
     tools:context=".ui.opportunities.OpportunitiesFragment">
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

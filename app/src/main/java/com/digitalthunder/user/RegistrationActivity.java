@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.digitalthunder.MenuActivity;
 import com.digitalthunder.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -121,6 +122,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (password.isEmpty() || password.length() < 10 || password.length() > 40) {
                     userRegistrationPassword.setError("Необходимо придумать пароль длиной от 10 до 40 символов");
                 }
+                if (imageUri == null) {
+                    Toast.makeText(RegistrationActivity.this, "Пожалуйста установите фото профиля", Toast.LENGTH_SHORT).show();
+                }
                 if (repeatPassword.isEmpty()) {
                     userRegistrationRepeatPassword.setError("Необходимо повторно ввести пароль");
                     return;
@@ -132,7 +136,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 if (password.equals(repeatPassword) && password.length() >= 10
-                        && !eMail.isEmpty() && !firstName.isEmpty() && !secondName.isEmpty()) {
+                        && !eMail.isEmpty() && !firstName.isEmpty() && !secondName.isEmpty() && imageUri != null) {
                     registrationProgressBar.setVisibility(View.VISIBLE);
                     fAuth.createUserWithEmailAndPassword(eMail, password)
                             .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
@@ -144,12 +148,14 @@ public class RegistrationActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> taskSendEMail) {
                                                 if (taskSendEMail.isSuccessful()) {
-                                                    UploadInfoInDataBase(eMail, firstName, secondName, password);
-                                                    VerifyEMailToast();
+                                                    if (fAuth.getCurrentUser() != null) {
+                                                        UploadInfoInDataBase(eMail, firstName, secondName, password);
+                                                        VerifyEMailToast();
 
-                                                    registrationProgressBar.setVisibility(View.GONE);
-                                                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
-                                                    finishAffinity();
+                                                        registrationProgressBar.setVisibility(View.GONE);
+                                                        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                                                        finishAffinity();
+                                                    }
                                                 } else {
                                                     String expText = taskSendEMail.getException().getMessage();
                                                     Log.d(TAG_USER_REGISTER, "Fail email send: " + taskSendEMail.getException());
@@ -191,7 +197,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void UploadInfoInDataBase(final String eMail, final String firstName, final String secondName, final String password) {
-        userID = fUser.getUid();
+        userID = fAuth.getCurrentUser().getUid();
         final StorageReference imageName = fStorageReference.child("image_" + userID);
         imageName.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

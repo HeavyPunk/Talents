@@ -1,13 +1,13 @@
-package com.digitalthunder.ui.events;
+package com.digitalthunder.ui.events.contest;
 
-public class Olimpiade {
+public class Contest {
     public String classes;
     public String title;
     public String subTitle;
     public String description;
     public String link;
 
-    public Olimpiade(String classes, String title, String subTitle, String description, String link)
+    public Contest(String classes, String title, String subTitle, String description, String link)
     {
         this.classes = classes;
         this.title = title;

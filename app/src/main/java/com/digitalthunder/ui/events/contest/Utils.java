@@ -1,4 +1,4 @@
-package com.digitalthunder.ui.events;
+package com.digitalthunder.ui.events.contest;
 
 import android.util.Log;
 
@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Utils {
-    public static ArrayList<Olimpiade> getOlympiadeData(String type) throws IOException {
+    public static ArrayList<Contest> getOlympiadeData(String type) throws IOException {
         final String addr = "https://olimpiada.ru/search?q=";
-        ArrayList<Olimpiade> olimpiades = new ArrayList<Olimpiade>();
+        ArrayList<Contest> contests = new ArrayList<Contest>();
         Document html;
         try
         {
@@ -22,27 +22,27 @@ public class Utils {
             Elements classes = html.getElementsByClass("classes_dop");
             for (int tableNum = 0; tableNum < table.size(); tableNum++)
             {
-                Olimpiade olimpiade = new Olimpiade("", "", "", "Описание отсутствует", "");
+                Contest contest = new Contest("", "", "", "Описание отсутствует", "");
 
-                olimpiade.classes = classes.get(tableNum).text();
+                contest.classes = classes.get(tableNum).text();
                 String description = table.get(tableNum).getElementsByClass("none_a black olimp_desc").first().text();
                 String link = table.get(tableNum).getElementsByClass("none_a black olimp_desc").first().attributes().get("href");
                 if(link != null)
-                    olimpiade.link = link;
+                    contest.link = link;
 
                 if(description != null && description != "")
-                    olimpiade.description = description;
+                    contest.description = description;
 
                 Elements titles = table.get(tableNum).getElementsByClass("headline");
                 for (int titleNum = 0; titleNum < titles.size(); titleNum++)
                 {
                     if(titles.get(titleNum).className().equals("headline")) {
-                        olimpiade.title = titles.get(titleNum).text();
+                        contest.title = titles.get(titleNum).text();
                     }
                     else
-                        olimpiade.subTitle = titles.get(titleNum).text();
+                        contest.subTitle = titles.get(titleNum).text();
                 }
-                olimpiades.add(new Olimpiade(olimpiade.classes, olimpiade.title, olimpiade.subTitle, olimpiade.description, olimpiade.link));
+                contests.add(new Contest(contest.classes, contest.title, contest.subTitle, contest.description, contest.link));
             }
 
         }
@@ -50,6 +50,6 @@ public class Utils {
         {
             Log.d("Olympiades", "ERROR");
         }
-        return olimpiades;
+        return contests;
     }
 }

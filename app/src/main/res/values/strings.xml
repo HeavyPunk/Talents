@@ -9,6 +9,7 @@
     <string name="registration_second_name">Фамилия</string>
     <string name="registration_password">Придумайте пароль</string>
     <string name="registration_repeat_password">Повторите пароль</string>
+    <string name="registration_enter_code">Введите регистрационный код</string>
     <string name="login_reset_password">Забыли пароль? Восстановите.</string>
     <string name="login_activity">Вход</string>
     <string name="registration_activity">Регистрация</string>
@@ -28,4 +29,6 @@
     <string name="description_profile_picture_first">Добавьте фото профиля.</string>
     <string name="description_profile_picture_second">Вашим наставникам будет легче вас находить.</string>
     <string name="message">Сообщение</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

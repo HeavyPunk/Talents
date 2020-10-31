@@ -114,19 +114,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registrationPassword"
-            app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
+            app:layout_constraintBottom_toTopOf="@+id/registrationCode"
             app:layout_constraintHorizontal_bias="0.5"
             android:singleLine="true"
             android:imeOptions="actionDone"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:digits="@string/digitsPassword"
+        android:id="@+id/registrationCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="textPassword"
+        android:hint="@string/registration_enter_code"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registrationRepeatPassword"
+        app:layout_constraintBottom_toTopOf="@+id/registrationProgressBar"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:singleLine="true"
+        android:imeOptions="actionDone"/>
 
     <ProgressBar
         android:id="@+id/registrationProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/createAccountButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountButton"
+        app:layout_constraintTop_toBottomOf="@+id/registrationCode"
         android:layout_margin="8dp"
         android:visibility="gone" />
 
@@ -136,8 +153,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/registrationRepeatPassword"
-            app:layout_constraintBottom_toBottomOf="@id/registrationProgressBar"
+            app:layout_constraintTop_toBottomOf="@id/registrationProgressBar"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="60dp"
             android:text="@string/create_account"/>
 

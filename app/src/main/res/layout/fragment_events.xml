@@ -1,53 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.events.EventsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintTop"
-        android:layout_height="wrap_content"
+    <ImageView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/picture_contest"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingBottom="48dp">
+        app:layout_constraintBottom_toTopOf="@id/picture_mentors"
+        android:src="@mipmap/background_contest"
+        tools:ignore="ContentDescription"
+        android:clickable="true"
+        android:focusable="true"/>
 
-        <EditText
-            android:id="@+id/searchSpace"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Поиск"
-            android:textSize="24sp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginStart="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Искать"
-            android:id="@+id/search_button"
-            app:layout_constraintTop_toTopOf="@id/searchSpace"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/searchSpace"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/picture_mentors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picture_contest"
+        android:src="@mipmap/background_mentors"
+        tools:ignore="ContentDescription"
+        android:clickable="true"
+        android:focusable="true"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintTop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
